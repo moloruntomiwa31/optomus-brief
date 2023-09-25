@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { useExploreStore } from "../../stores/explore.ts"
+import { useExploreStore } from "../../stores/explore"
 import { useRouter } from "vue-router"
 
 const exploreStore = useExploreStore()

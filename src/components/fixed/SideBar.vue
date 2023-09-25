@@ -77,9 +77,12 @@ import Theme from "./Theme.vue"
 import user from "../../assets/fixed/user.svg"
 import { useUserStore } from "@/stores/user";
 import { useToast } from "@/stores/toast";
+import { useRouter } from "vue-router";
+import { storage } from '@/firebase';
 
 const reader = useUserStore()
 const toast = useToast()
+const router = useRouter()
 
 
 const sideNav = reactive([
@@ -123,6 +126,7 @@ const saveAvatar = (imagesrc: string) => {
 const logOut = () => {
     reader.logOut()
     toast.addToast("Reader Logged Out!", "error")
+    router.push("/")
 }
 </script>
 
@@ -160,3 +164,8 @@ const logOut = () => {
     }
 }
 </style>
+
+// Your component
+const saveAvatar = async (imageSrc: string) => {
+
+};
