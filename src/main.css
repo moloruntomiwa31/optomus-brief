@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Office&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {font-family: 'Ysabeau Office', sans-serif;}
+
+.signUp-login {
+    @apply outline-none border-2 border-[#DBD0C0] md:w-4/5 p-2 rounded-lg
+}
+.flexStyles {
+    @apply  flex justify-center items-center
+}
+.overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(1px);
+}
+.tabOverlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}
