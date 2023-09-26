@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useExploreStore } from '@/stores/explore';
 import { useUserStore } from '@/stores/user';
 import ExploreSkeleton from '@/components/ExploreSkeleton.vue';
@@ -35,6 +35,7 @@ import { useSearchStore } from '@/stores/search';
 
 //datas
 const router = useRouter()
+const route = useRoute()
 const exploreStore = useExploreStore()
 const searchStore = useSearchStore()
 const reader = useUserStore()
@@ -45,9 +46,9 @@ const activeCategory = ref<string>("technology")
 const searchDetail = ref<string>("")
 
 //events
-const setActiveCategory = async (category: string) => {
-  await exploreStore.getCategory(category)
+const setActiveCategory = async (category: string | any) => {
   activeCategory.value = category
+  await exploreStore.getCategory(category)
   router.push({ query: { explore: category } })
 }
 
@@ -58,11 +59,12 @@ const filterCategory = (newCategory: string) => {
 const getBookTitle = () => {
   searchStore.getSearchDetails(searchDetail.value)
   router.push(`/search/${searchDetail.value}`)
+  localStorage.setItem("searchDetail", searchDetail.value)
 }
 
 //hooks
 onMounted(async () => {
-  await exploreStore.getCategory(categories[0])
+  setActiveCategory(route.query.explore || categories[0])
   setTimeout(() => isLoading.value = false, 2000)
 })
 </script>

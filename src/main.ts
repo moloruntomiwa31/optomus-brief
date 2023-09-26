@@ -19,7 +19,7 @@ import {
   faCircleCheck,
   faCircleQuestion,
   faSquare,
-  faArrowAltCircleUp
+  faArrowAltCircleUp,
 } from "@fortawesome/free-regular-svg-icons";
 library.add(
   faUser,

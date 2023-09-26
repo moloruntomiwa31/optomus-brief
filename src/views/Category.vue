@@ -6,7 +6,8 @@
             <font-awesome-icon icon="fa-regular fa-circle-left" size="2xl" />
         </button>
         <!-- {{ bookData }} -->
-        <div class="space-y-4 text-center bg-[#fcf1e3] md:shadow-md md:shadow-orange-500 dark:shadow-none p-6 rounded-lg dark:bg-[#544e4e]">
+        <div
+            class="space-y-4 text-center bg-[#fcf1e3] md:shadow-md md:shadow-orange-500 dark:shadow-none p-6 rounded-lg dark:bg-[#544e4e]">
             <div class="flex justify-center">
                 <img :src="`https://books.google.com/books/publisher/content/images/frontcover/${bookData.id}?fife=w400-h600&source=gbs_api`"
                     alt="book-cover-image" class="w-[15rem] md:w-[75%] lg:w-1/3">
@@ -18,7 +19,6 @@
             </h3>
             <h3 class="text-2xl" v-if="bookData.volumeInfo.publishedDate">Published Date : {{ formattedDate }}</h3>
             <div class="space-x-4">
-                <a :href="bookData.volumeInfo.previewLink" class="duration-200 hover:text-white bg-[#FF7517] min-w-[25%] p-3 rounded-lg">Preview</a>
                 <button class="bg-[#FF7517] p-2 rounded-lg hover:text-white duration-200" @click="addToFavourite">
                     <font-awesome-icon icon="fa-regular fa-square-plus" size="sm" />
                     Add to Favourites
@@ -60,6 +60,7 @@ const addToFavourite = () => {
     toast.addToast("Book Added To Favorites!", "success")
 }
 
+
 //hooks
 onMounted(() => {
     bookData.value = exploreStore.exploreArr.find((data) => data.id == id)
@@ -69,6 +70,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
