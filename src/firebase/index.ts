@@ -1,19 +1,23 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getStorage } from 'firebase/storage';
+import { getStorage, ref } from 'firebase/storage';
+import { getFirestore } from "firebase/firestore";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzhUYc2dLvw7V-xN_Pp18qeFPgFhZsOro",
-  authDomain: "optomus-brief.firebaseapp.com",
-  projectId: "optomus-brief",
-  storageBucket: "optomus-brief.appspot.com",
-  messagingSenderId: "975106987150",
-  appId: "1:975106987150:web:f2506119052ffc4a4765df",
+  apiKey: "AIzaSyDEjVOqdc2VkxZVwEHuR6barfgWvtPrqQg",
+  authDomain: "optomus-brief-69044.firebaseapp.com",
+  projectId: "optomus-brief-69044",
+  storageBucket: "optomus-brief-69044.appspot.com",
+  messagingSenderId: "1052781292049",
+  appId: "1:1052781292049:web:ebea5076f8033268df5fb0"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const storage = getStorage(app);
+const storageRef = ref(storage)
+const db = getFirestore(app)
 
 
-export { auth, app, storage };
+export { auth, app, storage, db };

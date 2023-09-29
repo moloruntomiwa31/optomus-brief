@@ -2,11 +2,7 @@
   <div>
     <SideBar />
     <Toast  v-if="toast.showToast"/>
-    <router-view v-slot="{ Component }">
-      <transition name="theme-fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <RouterView />
   </div>
 </template>
 

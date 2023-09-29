@@ -2,7 +2,7 @@
     <div class="dark:bg-[#3e3939] dark:text-white lg:w-[80%] w-full absolute right-0 min-h-full p-8 flexStyles flex-col"
         v-if="bookData">
         <button @click="router.back()"
-            class="bg-[#FF7517] absolute my-3 md:my-0 left-2 lg:left-[10%] top-[-2rem] md:top-[10%] p-2 rounded-full hover:text-white">
+            class="bg-[#FF7517] duration-100 absolute my-3 md:my-0 left-2 lg:left-[10%] top-[-2rem] md:top-[10%] p-2 rounded-full hover:text-white hover:dark:text-[#3e3939]">
             <font-awesome-icon icon="fa-regular fa-circle-left" size="2xl" />
         </button>
         <!-- {{ bookData }} -->
@@ -17,9 +17,12 @@
                 bookData.volumeInfo.categories.join(",") }}</h3>
             <h3 class="text-2xl" v-if="bookData.volumeInfo.authors">Authors : {{ bookData.volumeInfo.authors.join(",") }}
             </h3>
-            <h3 class="text-2xl" v-if="bookData.volumeInfo.publishedDate">Published Date : {{ formattedDate }}</h3>
+            <div>
+                <h3 class="text-2xl" v-if="bookData.volumeInfo.publishedDate">Published Date : {{ formattedDate }}</h3>
+                <h3 class="text-2xl" v-else>Published Date : Null</h3>
+            </div>
             <div class="space-x-4">
-                <button class="bg-[#FF7517] p-2 rounded-lg hover:text-white duration-200" @click="addToFavourite">
+                <button class="bg-[#FF7517] p-2 rounded-lg hover:text-white duration-200 hover:bg-[#3e3939]" @click="addToFavourite">
                     <font-awesome-icon icon="fa-regular fa-square-plus" size="sm" />
                     Add to Favourites
                 </button>
@@ -53,11 +56,14 @@ const { id } = route.params
 let formattedDate: string = ""
 
 //events
-const addToFavourite = () => {
-    if (bookData.value) {
-        favouriteStore.favouriteArr.push(bookData.value)
-    }
+const addToFavourite = async () => {
+   try{
+    await favouriteStore.addToFavourites(bookData.value)
+    console.log(favouriteStore.favouriteArr);
     toast.addToast("Book Added To Favorites!", "success")
+   }catch(e) {
+    console.log(e);
+   }
 }
 
 

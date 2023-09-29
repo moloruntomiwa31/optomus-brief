@@ -9,11 +9,11 @@
         <div class="flexStyles flex-col">
             <div @click="showAvatars = true"
                 class="dark:bg-[#FF7517] relative rounded-full w-3/5 h-3/5 p-3 bg-[#FFBF86] cursor-pointer">
-                <img :src="user" alt="user-avatar" ref="userImageDesktop" class="rounded-full">
+                <img :src="userImageSource" alt="user-avatar" class="rounded-full">
                 <font-awesome-icon icon="fa-regular fa-pen-to-square" class="absolute right-0 bottom-0" />
             </div>
             <!-- //username -->
-            <h2 class="text-xl capitalize">{{ reader.user?.email?.split("@")[0] || "bookworm" }}</h2>
+            <h2 class="text-xl capitalize">@{{ reader.user?.email?.split("@")[0] || "bookworm" }}</h2>
         </div>
         <PageRoutes :sideNav="sideNav" v-if="reader.user" />
         <PageRoutes :sideNav="sideNavForm" v-else />
@@ -27,7 +27,7 @@
         <div class="flex items-center justify-between min-w-full p-3">
             <div @click="showAvatars = true"
                 class="relative rounded-full w-[15%] md:w-[8%] p-2 bg-[#FFBF86] cursor-pointer dark:bg-[#FF7517]">
-                <img :src="user" alt="user-avatar" ref="userImage" class="rounded-full">
+                <img :src="userImageSource" alt="user-avatar" class="rounded-full">
                 <font-awesome-icon icon="fa-regular fa-pen-to-square" class="absolute right-0 bottom-1 dark:text-white" />
             </div>
             <div>
@@ -63,8 +63,7 @@
 
             <PageRoutes :sideNav="sideNav" v-if="reader.user" />
             <PageRoutes :sideNav="sideNavForm" v-else />
-             <button class="bg-[#E89F71] dark:bg-[#FF7517] p-3 rounded-lg"
-                @click="logOut">Log Out</button>
+            <button class="bg-[#E89F71] dark:bg-[#FF7517] p-3 rounded-lg" @click="logOut">Log Out</button>
         </div>
     </main>
 </template>
@@ -78,13 +77,12 @@ import user from "../../assets/fixed/user.svg"
 import { useUserStore } from "@/stores/user";
 import { useToast } from "@/stores/toast";
 import { useRouter } from "vue-router";
-import { storage } from '@/firebase';
 
 const reader = useUserStore()
 const toast = useToast()
 const router = useRouter()
 
-
+//data
 const sideNav = reactive([
     {
         name: "Explore",
@@ -112,21 +110,22 @@ const sideNavForm = reactive([
 
 const showAvatars = ref<boolean>(false)
 const showModal = ref<boolean>(false)
-const userImage = ref<HTMLImageElement | null>(null)
-const userImageDesktop = ref<HTMLImageElement | null>(null)
 
+const userImageSource = ref<string>(localStorage.getItem("imageSource") || user);
+
+
+//events
 const saveAvatar = (imagesrc: string) => {
-    if (userImage.value && userImageDesktop.value) {
-        userImage.value.src = imagesrc
-        userImageDesktop.value.src = imagesrc
-    }
-    showAvatars.value = false
+    localStorage.setItem("imageSource", imagesrc);
+    userImageSource.value = imagesrc;
+    showAvatars.value = false;
 }
 
 const logOut = () => {
     reader.logOut()
     toast.addToast("Reader Logged Out!", "error")
     router.push("/")
+    localStorage.clear()
 }
 </script>
 
@@ -164,8 +163,3 @@ const logOut = () => {
     }
 }
 </style>
-
-// Your component
-const saveAvatar = async (imageSrc: string) => {
-
-};

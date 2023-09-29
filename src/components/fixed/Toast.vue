@@ -2,9 +2,7 @@
     <div v-if="toast.showToast" :class="toast.bgColor"
         class="slide toast-wrapper mt-3 md:mt-0 p-2 md:p-4 rounded-md fixed top-[4rem] z-50 right-8  text-center">
         <div class="toast text text-white flex items-center space-x-2">
-            <font-awesome-icon icon="fa-regular fa-circle-check" v-if="toast.toastText === 'success'" size="xl" />
-            <font-awesome-icon icon="fa-regular fa-circle-question" v-else-if="toast.toastText === 'info'" size="xl" />
-            <img src="../../assets/bug.svg" alt="bug-image" v-else>
+            <img :src="toast.icon" alt="toast-image">
             <p>{{ toast.toastText }}</p>
         </div>
     </div>
