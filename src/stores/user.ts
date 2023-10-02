@@ -8,6 +8,7 @@ import {
 import type { UserCredential, User } from "firebase/auth";
 import { auth } from "@/firebase";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref<User | null>(null);
@@ -46,6 +47,8 @@ export const useUserStore = defineStore("user", () => {
 
 onAuthStateChanged(auth, (user) => {
   useUserStore().user = user;
+  const router = useRouter()
+  router.push("/explore")
 });
 
 // hmr

@@ -11,26 +11,25 @@
                             alt="book-cover-image"
                             class="lg:h-[400px] h-[13rem] lg:w-full object-cover lg:rounded-t-xl rounded-md">
                         <div class="flex flex-col items-start">
-                            <h5 class="font-bold text-2xl lg:text-xl p-2 text-black dark:text-[#ff6600] w-full capitalize">
+                            <h5 class="font-bold text-2xl lg:text-xl p-2 text-black dark:text-[#FFA559] w-full capitalize">
                                 {{ data.volumeInfo.title }}</h5>
                             <div v-for="genre in data.volumeInfo.categories" :key="genre"
                                 class="bg-[#0E918C] p-2 rounded-lg w-fit">
                                 <p> {{ genre }}</p>
                             </div>
                             <div>
-                                <h5 class="font-bold lg:text-md p-2 text-black dark:text-white w-full capitalize">
+                                <h5 class="font-bold lg:text-md p-2 text-black dark:text-white w-full capitalize" v-if="data.volumeInfo.publishedDate">
                                     Published Date: {{ getFormattedDate(data.volumeInfo.publishedDate) }}</h5>
                                 <h5 class="font-bold lg:text-md p-2 text-black w-full capitalize dark:text-white"
                                     v-if="data.volumeInfo.authors">
                                     Authors : {{ data.volumeInfo.authors.join(",") }}</h5>
                             </div>
+                            <button @click="data.showSummary = true"
+                                class="dark:bg-[#FFE6C7] dark:hover:bg-[#dfd8cf]  text-black bg-[#FFBF86] duration-150 p-2 ml-2 rounded-lg">Show
+                                Summary</button>
                         </div>
                     </div>
-                    <p v-if="data.volumeInfo.description" class="md:text-lg p-4 dark:text-[#fff] w-full text-black">{{
-                        data.volumeInfo.description.slice(0, 200) }}......</p>
-                    <RouterLink :to="`/search/${data.volumeInfo.title}/details`"
-                        class="bg-[#ff6600] text-white p-2 rounded-lg ml-4">More Details
-                    </RouterLink>
+                    <SummaryModal :data="data.volumeInfo.description" v-if="data.showSummary" @close="data.showSummary = false"/>
                 </div>
             </div>
         </div>
@@ -47,6 +46,7 @@ import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSearchStore } from "../stores/search"
 import { format } from 'date-fns';
+import SummaryModal from "@/components/favourite/SummaryModal.vue";
 
 //data
 const { searchArr } = storeToRefs(useSearchStore())

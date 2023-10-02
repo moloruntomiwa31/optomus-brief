@@ -14,7 +14,13 @@ export const useSearchStore = defineStore("search", () => {
     const res = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${apiKey.value}`
     );
-    searchArr.splice(0, searchArr.length, ...res.data.items);
+
+    // Create new objects with showSummary property and prepend them to searchArr
+    const itemsToAdd = res.data.items.map((item: object) => ({
+      ...item,
+      showSummary: false,
+    }));
+    searchArr.splice(0, searchArr.length, ...itemsToAdd);
 
     localStorage.setItem("searchResult", JSON.stringify(searchArr));
   }
