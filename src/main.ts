@@ -20,6 +20,7 @@ import {
   faCircleQuestion,
   faSquare,
   faArrowAltCircleUp,
+  faSadTear,
 } from "@fortawesome/free-regular-svg-icons";
 library.add(
   faUser,
@@ -33,7 +34,8 @@ library.add(
   faCircleCheck,
   faCircleQuestion,
   faSquare,
-  faArrowAltCircleUp
+  faArrowAltCircleUp,
+  faSadTear
 );
 
 const app = createApp(App);

@@ -72,7 +72,6 @@ onMounted(() => {
     bookData.value = exploreStore.exploreArr.find((data) => data.id == id)
     const rawDate = bookData.value.volumeInfo.publishedDate;
     formattedDate = format(new Date(rawDate), "do MMMM, yyyy");
-    console.log(bookData);
 })
 </script>
 
