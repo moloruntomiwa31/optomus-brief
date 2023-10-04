@@ -19,7 +19,7 @@
         <PageRoutes :sideNav="sideNavForm" v-else />
         <div class="flex flex-col space-y-4">
             <Theme />
-            <button @click="logOut">Log Out</button>
+            <button @click="logOut" v-if="reader.user">Log Out</button>
         </div>
     </main>
     <!-- ----------------mobile -->
@@ -63,7 +63,7 @@
 
             <PageRoutes :sideNav="sideNav" v-if="reader.user" />
             <PageRoutes :sideNav="sideNavForm" v-else />
-            <button class="bg-[#E89F71] dark:bg-[#FF7517] p-3 rounded-lg" @click="logOut">Log Out</button>
+            <button class="bg-[#E89F71] dark:bg-[#FF7517] p-3 rounded-lg" @click="logOut" v-if="reader.user">Log Out</button>
         </div>
     </main>
 </template>
