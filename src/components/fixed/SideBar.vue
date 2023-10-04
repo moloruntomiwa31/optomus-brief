@@ -63,7 +63,8 @@
 
             <PageRoutes :sideNav="sideNav" v-if="reader.user" />
             <PageRoutes :sideNav="sideNavForm" v-else />
-            <button class="bg-[#E89F71] dark:bg-[#FF7517] p-3 rounded-lg" @click="logOut" v-if="reader.user">Log Out</button>
+            <button class="bg-[#E89F71] dark:bg-[#FF7517] p-3 rounded-lg" @click="logOut" v-if="reader.user">Log
+                Out</button>
         </div>
     </main>
 </template>
@@ -110,6 +111,7 @@ const sideNavForm = reactive([
 
 const showAvatars = ref<boolean>(false)
 const showModal = ref<boolean>(false)
+router.afterEach(() => showModal.value = false)
 
 const userImageSource = ref<string>(localStorage.getItem("imageSource") || user);
 

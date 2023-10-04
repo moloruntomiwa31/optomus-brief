@@ -13,6 +13,7 @@
 import { RouterLink } from 'vue-router';
 import type SideNav from "../types/sideNav"
 
+
 defineProps<{
     sideNav: SideNav[]
 }>()
