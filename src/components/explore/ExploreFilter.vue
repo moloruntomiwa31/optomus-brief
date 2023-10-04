@@ -31,7 +31,7 @@ watch(selectCategory, (newCategory) => {
 
 //hooks
 onMounted(() => {
-  selectCategory.value = route.query.explore || "technology";
+  selectCategory.value = route.query.explore as string || "technology";
 });
 </script>
 
