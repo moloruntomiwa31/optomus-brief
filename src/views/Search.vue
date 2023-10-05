@@ -47,7 +47,7 @@ import { RouterLink, useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSearchStore } from "../stores/search"
-import { useDateFormatter } from "../composables/useDateFormatter.ts"
+import { useDateFormatter } from "../composables/useDateFormatter"
 import SummaryModal from "@/components/favourite/SummaryModal.vue";
 
 //data

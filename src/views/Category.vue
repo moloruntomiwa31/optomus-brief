@@ -42,7 +42,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useExploreStore } from '@/stores/explore';
 import { useFavouriteStore } from '@/stores/favourite';
 import { useToast } from '@/stores/toast';
-import { useDateFormatter } from '@/composables/useDateFormatter';
+import { useDateFormatter } from "../composables/useDateFormatter"
 import { onMounted, ref } from 'vue';
 import ReadMore from '@/components/fixed/ReadMore.vue';
 
