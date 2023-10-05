@@ -18,7 +18,8 @@
                                 <p> {{ genre }}</p>
                             </div>
                             <div>
-                                <h5 class="font-bold lg:text-md p-2 text-black dark:text-white w-full capitalize" v-if="data.volumeInfo.publishedDate">
+                                <h5 class="font-bold lg:text-md p-2 text-black dark:text-white w-full capitalize"
+                                    v-if="data.volumeInfo.publishedDate">
                                     Published Date: {{ getFormattedDate(data.volumeInfo.publishedDate) }}</h5>
                                 <h5 class="font-bold lg:text-md p-2 text-black w-full capitalize dark:text-white"
                                     v-if="data.volumeInfo.authors">
@@ -29,7 +30,8 @@
                                 Summary</button>
                         </div>
                     </div>
-                    <SummaryModal :data="data.volumeInfo.description" v-if="data.showSummary" @close="data.showSummary = false"/>
+                    <SummaryModal :data="data.volumeInfo.description" v-if="data.showSummary"
+                        @close="data.showSummary = false" />
                 </div>
             </div>
         </div>
@@ -45,16 +47,14 @@ import { RouterLink, useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSearchStore } from "../stores/search"
-import { format } from 'date-fns';
+import { useDateFormatter } from "../composables/useDateFormatter.ts"
 import SummaryModal from "@/components/favourite/SummaryModal.vue";
 
 //data
 const { searchArr } = storeToRefs(useSearchStore())
 const isLoading = ref<boolean>(true)
+const { getFormattedDate } = useDateFormatter()
 //events
-const getFormattedDate = (date: string) => {
-    return format(new Date(date), "do MMMM, yyyy");
-}
 
 const getBookDetails = (searchTitle: string) => {
     useSearchStore().getSearchDetails(searchTitle)

@@ -125,9 +125,9 @@ const saveAvatar = (imagesrc: string) => {
 
 const logOut = () => {
     reader.logOut()
+    localStorage.clear()
     toast.addToast("Reader Logged Out!", "error")
     router.push("/")
-    localStorage.clear()
 }
 </script>
 

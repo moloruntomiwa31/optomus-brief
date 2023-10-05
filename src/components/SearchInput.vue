@@ -4,9 +4,11 @@
             <input type="text" placeholder="Search books via title..." v-model.trim="searchDetail"
                 @keyup.enter="getBookTitle"
                 class="placeholder:text-white dark:placeholder:text-[#3e3939] shadow-orange-500 shadow-sm p-3 outline-none rounded-lg bg-[#3e3939] text-white dark:bg-white dark:text-gray-600">
-            <button @click="getBookTitle" class="lg:hidden dark:bg-orange-500 p-2 rounded-lg text-white w-fit">Search</button>
+            <button @click="getBookTitle"
+                class="lg:hidden dark:bg-orange-500 p-2 rounded-lg dark:text-white w-fit bg-[#fcf1e3] dark:shadow-none shadow shadow-orange-300 text-black">Search</button>
         </div>
-        <h2 class="dark:text-white text-[#3e3939] text-xl capitalize">Hi, {{ reader.user?.email?.split("@")[0] ||
+        <h2 class="dark:text-white text-[#3e3939] text-xl capitalize whitespace-nowrap">Hi, {{
+            reader.user?.email?.split("@")[0] ||
             "bookworm" }}<font-awesome-icon icon="fa-regular fa-face-smile" bounce size="lg"></font-awesome-icon></h2>
     </div>
 </template>

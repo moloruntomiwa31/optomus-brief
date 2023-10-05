@@ -35,7 +35,8 @@ library.add(
   faCircleQuestion,
   faSquare,
   faArrowAltCircleUp,
-  faSadTear
+  faSadTear,
+  faArrowAltCircleUp
 );
 
 const app = createApp(App);

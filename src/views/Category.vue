@@ -18,11 +18,13 @@
             <h3 class="text-2xl" v-if="bookData.volumeInfo.authors">Authors : {{ bookData.volumeInfo.authors.join(",") }}
             </h3>
             <div>
-                <h3 class="text-2xl" v-if="bookData.volumeInfo.publishedDate">Published Date : {{ formattedDate }}</h3>
+                <h3 class="text-2xl" v-if="bookData.volumeInfo.publishedDate">Published Date : {{
+                    getFormattedDate(bookData.volumeInfo.publishedDate) }}</h3>
                 <h3 class="text-2xl" v-else>Published Date : Null</h3>
             </div>
             <div class="space-x-4">
-                <button class="bg-[#FF7517] p-2 rounded-lg hover:text-white duration-200 hover:bg-[#3e3939]" @click="addToFavourite">
+                <button class="bg-[#FF7517] p-2 rounded-lg hover:text-white duration-200 hover:bg-[#3e3939]"
+                    @click="addToFavourite">
                     <font-awesome-icon icon="fa-regular fa-square-plus" size="sm" />
                     Add to Favourites
                 </button>
@@ -40,7 +42,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useExploreStore } from '@/stores/explore';
 import { useFavouriteStore } from '@/stores/favourite';
 import { useToast } from '@/stores/toast';
-import { format } from 'date-fns';
+import { useDateFormatter } from '@/composables/useDateFormatter';
 import { onMounted, ref } from 'vue';
 import ReadMore from '@/components/fixed/ReadMore.vue';
 
@@ -53,25 +55,23 @@ const toast = useToast()
 //data
 const bookData = ref<any | null>(null)
 const { id } = route.params
-let formattedDate: string = ""
+const { getFormattedDate } = useDateFormatter()
 
 //events
 const addToFavourite = async () => {
-   try{
-    await favouriteStore.addToFavourites(bookData.value)
-    console.log(favouriteStore.favouriteArr);
-    toast.addToast("Book Added To Favorites!", "success")
-   }catch(e) {
-    console.log(e);
-   }
+    try {
+        await favouriteStore.addToFavourites(bookData.value)
+        console.log(favouriteStore.favouriteArr);
+        toast.addToast("Book Added To Favorites!", "success")
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 
 //hooks
 onMounted(() => {
     bookData.value = exploreStore.exploreArr.find((data) => data.id == id)
-    const rawDate = bookData.value.volumeInfo.publishedDate;
-    formattedDate = format(new Date(rawDate), "do MMMM, yyyy");
 })
 </script>
 
